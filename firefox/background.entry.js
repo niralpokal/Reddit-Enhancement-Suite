@@ -24,17 +24,17 @@ addListener('isURLVisited', async url =>
 );
 
 // Firefox <a download> is same-origin only
-addListener('download', ({ url, filename }) => {
-	chrome.downloads.download({ url, filename });
+addListener('download', ({ url, filename }, { incognito }) => {
+	chrome.downloads.download({ url, filename, incognito });
 });
 
-// Firefox doesn't support openerTabId, and needs cookieStoreId to open in correct container
-addListener('openNewTabs', ({ urls, focusIndex }, { index: currentIndex, cookieStoreId }) => {
+// Firefox needs cookieStoreId to open in correct container
+addListener('openNewTabs', ({ urls, focusIndex }, { id: tabId, cookieStoreId }) => {
 	urls.forEach((url, i) => {
 		chrome.tabs.create({
 			url,
 			active: i === focusIndex,
-			index: ++currentIndex,
+			openerTabId: tabId,
 			cookieStoreId,
 		});
 	});
