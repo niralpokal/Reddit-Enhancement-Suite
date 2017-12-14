@@ -3,6 +3,7 @@
 /* eslint-disable import/no-nodejs-modules */
 
 import path from 'path';
+import webpack from 'webpack';
 
 import InertEntryPlugin from 'inert-entry-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
@@ -83,6 +84,7 @@ export default (env = {}) => {
 								}],
 								'lodash',
 							],
+							comments: !isProduction,
 							babelrc: false,
 						},
 					},
@@ -101,6 +103,7 @@ export default (env = {}) => {
 								}],
 							],
 							compact: true,
+							comments: false,
 							babelrc: false,
 						},
 					},
@@ -122,13 +125,13 @@ export default (env = {}) => {
 					{ loader: 'html-loader', options: { attrs: ['link:href', 'script:src'] } },
 				],
 			}, {
-				test: /\.(png|gif)$/,
+				test: /\.(png|gif|svg)$/,
 				exclude: path.join(__dirname, 'lib', 'images'),
 				use: [
 					{ loader: 'file-loader', options: { name: '[name].[ext]' } },
 				],
 			}, {
-				test: /\.(png|gif)$/,
+				test: /\.(png|gif|svg)$/,
 				include: path.join(__dirname, 'lib', 'images'),
 				use: [
 					{ loader: 'url-loader' },
@@ -136,6 +139,7 @@ export default (env = {}) => {
 			}],
 		},
 		plugins: [
+			new webpack.optimize.ModuleConcatenationPlugin(),
 			new ProgressBarPlugin(),
 			new InertEntryPlugin(),
 			new LodashModuleReplacementPlugin(),
