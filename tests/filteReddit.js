@@ -26,6 +26,7 @@ function editSettings(callback) {
 	return (browser, done) => {
 		browser
 			.url('https://www.reddit.com/wiki/pages/#res:settings/filteReddit')
+			.refresh() // get rid of update notification
 			.waitForElementVisible('#RESConsoleContainer')
 			.perform(callback)
 			.click('#moduleOptionsSave');
@@ -71,17 +72,6 @@ module.exports = {
 			.url(byId(POST.ABC, POST.A))
 			.waitForElementNotVisible(thing(POST.A))
 			.assert.visible(thing(POST.ABC))
-
-			// unlesskeyword is not regex
-			.perform(editSettings(() => browser
-				.clearValue('#optionContainer-filteReddit-keywords input')
-				.setValue('#optionContainer-filteReddit-keywords input', ['a'])
-				.clearValue('#optionContainer-filteReddit-keywords input#keywords_unlessKeyword_0')
-				.setValue('#optionContainer-filteReddit-keywords input#keywords_unlessKeyword_0', ['/[a-c]/i'])
-			))
-			.url(byId(POST.ABC, POST.ABCLikeRegex))
-			.waitForElementNotVisible(thing(POST.ABC))
-			.assert.visible(thing(POST.ABCLikeRegex))
 			.end();
 	},
 	'post domains': browser => {
@@ -323,31 +313,6 @@ module.exports = {
 			.url('https://www.reddit.com/r/popular/?limit=1')
 			.pause(1000)
 			.assert.visible('#siteTable .thing' /* first thing */)
-			.end();
-	},
-	'filterline basic usage': browser => {
-		const normalPost = '#thing_t3_6331zg';
-		const nsfwPost = '#thing_t3_63320d';
-
-		browser
-			.url('https://www.reddit.com/by_id/t3_6331zg,t3_63320d')
-			.waitForElementVisible('.res-toggle-filterline-visibility')
-			.assert.elementNotPresent('.res-filterline')
-			.assert.visible(normalPost)
-			.assert.visible(nsfwPost)
-			.click('.res-toggle-filterline-visibility')
-			.assert.visible('.res-filterline')
-			.assert.visible(normalPost)
-			.assert.visible(nsfwPost)
-			.click('.res-filterline-filter[filter-key="isNSFW"]')
-			.waitForElementNotVisible(normalPost)
-			.assert.visible(nsfwPost)
-			.click('.res-filterline-filter[filter-key="isNSFW"]')
-			.waitForElementNotVisible(nsfwPost)
-			.assert.visible(normalPost)
-			.click('.res-filterline-filter[filter-key="isNSFW"]')
-			.assert.visible(normalPost)
-			.assert.visible(nsfwPost)
 			.end();
 	},
 };

@@ -3,8 +3,8 @@
 /* eslint-disable import/no-nodejs-modules */
 
 import path from 'path';
-import webpack from 'webpack';
 
+import webpack from 'webpack';
 import InertEntryPlugin from 'inert-entry-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
@@ -31,6 +31,7 @@ const browserConfig = {
 		target: 'firefox',
 		entry: 'firefox/manifest.json',
 		output: 'firefox',
+		noSourcemap: true,
 	},
 	firefoxbeta: {
 		target: 'firefox',
@@ -54,7 +55,11 @@ export default (env = {}) => {
 			path: path.join(__dirname, 'dist', conf.output),
 			filename: path.basename(conf.entry),
 		},
-		devtool: isProduction ? 'source-map' : 'cheap-source-map',
+		devtool: (() => {
+			if (!isProduction) return 'cheap-source-map';
+			if (!conf.noSourcemap) return 'source-map';
+			return false;
+		})(),
 		bail: isProduction,
 		node: false,
 		performance: false,
@@ -75,7 +80,6 @@ export default (env = {}) => {
 								'transform-export-extensions',
 								'transform-class-properties',
 								['transform-object-rest-spread', { useBuiltIns: true }],
-								'transform-es2015-modules-commonjs',
 								'transform-flow-strip-types',
 								'transform-dead-code-elimination',
 								['transform-define', {
@@ -139,10 +143,10 @@ export default (env = {}) => {
 			}],
 		},
 		plugins: [
-			new webpack.optimize.ModuleConcatenationPlugin(),
 			new ProgressBarPlugin(),
 			new InertEntryPlugin(),
 			new LodashModuleReplacementPlugin(),
+			new webpack.optimize.ModuleConcatenationPlugin(),
 			(env.zip && !conf.noZip && new ZipPlugin({
 				path: path.join('..', 'zip'),
 				filename: conf.output,

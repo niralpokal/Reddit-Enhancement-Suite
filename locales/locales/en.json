@@ -307,7 +307,7 @@
 		"message": "filteReddit"
 	},
 	"filteRedditDesc": {
-		"message": "Filter out NSFW content, or links by keyword, domain (use User Tagger to ignore by user) or subreddit (for /r/all or /domain/*)."
+		"message": "Filter out NSFW content, or links by keyword, domain (use User Tagger to ignore by user) or subreddit (for /r/all or /domain/*).\n\nRegExp like `/(this|that|theother)/i` is allowed in text boxes. Find out more on the [/r/Enhancement wiki](/r/Enhancement/wiki/index/filters/filtereddit/regexp)."
 	},
 	"floaterName": {
 		"message": "Floating Islands"
@@ -879,6 +879,18 @@
 	"keyboardNavPrevPageDesc": {
 		"message": "Go to previous page (link list pages only)."
 	},
+	"keyboardNavOverviewLegacyTitle": {
+		"message": "Legacy Profile"
+	},
+	"keyboardNavOverviewLegacyDesc": {
+		"message": "Go to legacy (overview) profile (profile pages only)."
+	},
+	"keyboardNavProfileViewTitle": {
+		"message": "New Profile"
+	},
+	"keyboardNavProfileViewDesc": {
+		"message": "Go to new profile (profile pages only)."
+	},
 	"keyboardNavToggleCommentNavigatorTitle": {
 		"message": "Toggle Comment Navigator"
 	},
@@ -1163,6 +1175,24 @@
 	},
 	"newCommentCountMonitorPostsVisitedIncognitoDesc": {
 		"message": "Monitor the number of comments and edit dates of posts you have visited while browsing in incognito/private mode."
+	},
+	"readCommentsName": {
+		"message": "Read Comments"
+	},
+	"readCommentsDesc": {
+		"message": "Keep track of what comments you have read. Useful for filtering comments."
+	},
+	"readCommentsCleanCommentsTitle": {
+		"message": "Clean Comments"
+	},
+	"readCommentsCleanCommentsDesc": {
+		"message": "Number of days to keep track of a comment page."
+	},
+	"readCommentsMonitorWhenIncognitoTitle": {
+		"message": "Monitor When Incognito"
+	},
+	"readCommentsMonitorWhenIncognitoDesc": {
+		"message": "Keep track while browsing in incognito/private mode."
 	},
 	"nightModeName": {
 		"message": "Night Mode"
@@ -2269,19 +2299,13 @@
 		"message": "Show Filterline"
 	},
 	"filteRedditShowFilterlineDesc": {
-		"message": "Show filterline controls by default."
+		"message": "Show Filterline controls by default."
 	},
 	"filteRedditExcludeOwnPostsTitle": {
 		"message": "Exclude Own Posts"
 	},
 	"filteRedditExcludeOwnPostsDesc": {
 		"message": "Don't filter your own posts."
-	},
-	"filteRedditExcludeCommentsPageTitle": {
-		"message": "Exclude Comments Page"
-	},
-	"filteRedditExcludeCommentsPageDesc": {
-		"message": "When visiting the comments page for a filtered link, allow the link/expando to be shown."
 	},
 	"filteRedditExcludeModqueueTitle": {
 		"message": "Exclude Modqueue"
@@ -2295,23 +2319,17 @@
 	"filteRedditExcludeUserPagesDesc": {
 		"message": "Don't filter anything on users' profile pages."
 	},
-	"filteRedditRegexpFiltersTitle": {
-		"message": "Regexp Filters"
-	},
-	"filteRedditRegexpFiltersDesc": {
-		"message": "Allow RegExp in certain filteReddit fields.\nIf you have filters which start with `/` and don't know what RegExp is, you should turn this option off.\n\nFind out more on the [/r/Enhancement wiki](/r/Enhancement/wiki/index/filters/filtereddit/regexp)."
-	},
 	"filteRedditKeywordsTitle": {
 		"message": "Keywords"
 	},
 	"filteRedditKeywordsDesc": {
-		"message": "Hide posts with certain keywords in the title.\nRegExp like `/(this|that|theother)/i` is allowed for keyword (but not unlessKeyword).\n\nFind out more on the [/r/Enhancement wiki](/r/Enhancement/wiki/index/filters/filtereddit/regexp)."
+		"message": "Hide posts with certain keywords in the title."
 	},
 	"filteRedditSubredditsTitle": {
 		"message": "Subreddits"
 	},
 	"filteRedditSubredditsDesc": {
-		"message": "Hide posts submitted to certain subreddits.\nRegExp like `/(this|that|theother)/i` is allowed for subreddit.\n\nFind out more on the [/r/Enhancement wiki](/r/Enhancement/wiki/index/filters/filtereddit/regexp)."
+		"message": "Hide posts submitted to certain subreddits."
 	},
 	"filteRedditSubredditsSubreddits": {
 		"message": "subreddits"
@@ -2341,13 +2359,13 @@
 		"message": "Domains"
 	},
 	"filteRedditDomainsDesc": {
-		"message": "Hide posts that link to certain domains.\nCaution: domain keywords like \"reddit\" would ignore \"reddit.com\" and \"fooredditbar.com\".\nRegExp like `/(this|that|theother)/i` is allowed for domain.\n\nFind out more on the [/r/Enhancement wiki](/r/Enhancement/wiki/index/filters/filtereddit/regexp)."
+		"message": "Hide posts that link to certain domains.\nCaution: domain keywords like \"reddit\" would ignore \"reddit.com\" and \"fooredditbar.com\"."
 	},
 	"filteRedditFlairTitle": {
 		"message": "Flair"
 	},
 	"filteRedditFlairDesc": {
-		"message": "Hide posts where certain keywords are in the post's link flair.\nRegExp like `/(this|that|theother)/i` is allowed for flair.\n\nFind out more on the [/r/Enhancement wiki](/r/Enhancement/wiki/index/filters/filtereddit/regexp)."
+		"message": "Hide posts where certain keywords are in the post's link flair."
 	},
 	"filteRedditAllowNSFWTitle": {
 		"message": "Allow NSFW"
@@ -2361,8 +2379,11 @@
 	"filteRedditAllowNSFWWhenBrowsingSubreddit": {
 		"message": "When browsing subreddit/multi-subreddit"
 	},
-	"filteRedditCustomFiltersTitle": {
-		"message": "Custom Filters"
+	"filteRedditCustomFiltersPTitle": {
+		"message": "Custom Post Filters"
+	},
+	"filteRedditCustomFiltersCTitle": {
+		"message": "Custom Comment Filters"
 	},
 	"filteRedditCustomFiltersDesc": {
 		"message": "Hide posts based on complex custom criteria.\n\nThis is a very advanced feature, please [read the guide](/r/Enhancement/wiki/customfilters) before asking questions."
@@ -2408,9 +2429,6 @@
 	},
 	"filteRedditAddCustomFilter": {
 		"message": "+add custom filter"
-	},
-	"filteRedditCustomFiltersGroupOfConditions": {
-		"message": "Group of conditions"
 	},
 	"subredditManagerMultiCountTitle": {
 		"message": "/r/$1 is in $2 multireddits"
