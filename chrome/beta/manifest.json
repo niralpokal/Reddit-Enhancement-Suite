@@ -5,8 +5,8 @@
 	"description": "{{prop-loader?description!../../package.json}}",
 	"author": "{{prop-loader?author!../../package.json}}",
 	"homepage_url": "{{prop-loader?homepage!../../package.json}}",
-	"minimum_chrome_version": "61",
-	"minimum_opera_version": "48",
+	"minimum_chrome_version": "64",
+	"minimum_opera_version": "51",
 	"icons": {
 		"48": "{{../../images/beta48.png}}",
 		"128": "{{../../images/beta128.png}}"
@@ -40,6 +40,7 @@
 			"https://blog.reddit.com/*",
 			"https://code.reddit.com/*",
 			"https://about.reddit.com/*",
+			"https://*.reddit.com/chat/*",
 			"https://*.reddit.com/*.compact",
 			"https://*.reddit.com/*.compact?*",
 			"https://*.reddit.com/*.mobile",
@@ -68,6 +69,8 @@
 		"webRequest"
 	],
 	"optional_permissions": [
+		"downloads",
+
 		"https://api.twitter.com/*",
 		"https://backend.deviantart.com/oembed",
 		"https://api.gyazo.com/api/oembed",
@@ -81,5 +84,8 @@
 		"https://accounts.google.com/o/oauth2/v2/auth",
 		"https://www.dropbox.com/oauth2/authorize",
 		"https://login.live.com/oauth20_authorize.srf"
+	],
+	"web_accessible_resources": [
+		"{{../../lib/fonts/batch-icons-webfont.woff}}"
 	]
 }

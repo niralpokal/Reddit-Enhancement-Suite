@@ -17,12 +17,12 @@ module.exports = {
 			// In this test, that behaviour causes the user hover info to appear after loading more comments,
 			// which breaks everything by covering up the comments we need to click on.
 			// It's too difficult to work around, so just disable user info entirely.
-			.url('https://www.reddit.com/wiki/pages#res:settings/userInfo')
+			.url('https://en.reddit.com/wiki/pages#res:settings/userInfo')
 			.waitForElementVisible('#RESConsoleContainer')
 			.click('.moduleToggle')
 
 			// Run the actual test...
-			.url('https://www.reddit.com/r/RESIntegrationTests/comments/5lfy0v/selected_entry_selecting_comments/?limit=1')
+			.url('https://en.reddit.com/r/RESIntegrationTests/comments/5lfy0v/selected_entry_selecting_comments/?limit=1')
 
 			.waitForElementVisible(parentPost)
 			.assert.cssClassPresent(parentPost, selectedClass)
@@ -31,20 +31,20 @@ module.exports = {
 			.assert.cssClassPresent(stickiedComment, selectedClass)
 
 			.pause(1000)
+			.click(loadMoreChildrenOfSticky)
+			.waitForElementVisible(childOfStickiedComment2)
+			.assert.cssClassPresent(childOfStickiedComment1, selectedClass)
+
+			.click(`${childOfStickiedComment2} .md p`)
+			.assert.cssClassPresent(childOfStickiedComment2, selectedClass)
+
+			.pause(1000)
 			.click(loadMoreComments)
 			.waitForElementVisible(childComment1)
 			.assert.cssClassPresent(childComment1, selectedClass)
 
 			.click(childComment2)
 			.assert.cssClassPresent(childComment2, selectedClass)
-
-			.pause(1000)
-			.click(loadMoreChildrenOfSticky)
-			.waitForElementVisible(childOfStickiedComment2)
-			.assert.cssClassPresent(childOfStickiedComment1, selectedClass)
-
-			.click(childOfStickiedComment2)
-			.assert.cssClassPresent(childOfStickiedComment2, selectedClass)
 
 			.end();
 	},

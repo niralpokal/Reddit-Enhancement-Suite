@@ -123,7 +123,7 @@
 		"message": "Account Switcher"
 	},
 	"accountSwitcherDesc": {
-		"message": "Store username/password pairs and switch accounts instantly while browsing Reddit!\n\nIf you forget a password which is stored in Account Switcher, [you can recover them from RES settings](/r/Enhancement/wiki/faq/passwords). Be aware that RES offers very little protection for stored passwords, so be careful when sharing your computer or settings!"
+		"message": "Store username/password pairs and switch accounts instantly while browsing Reddit!\n\nIf you forget a password which is stored in Account Switcher, [you can recover them from RES settings](/r/Enhancement/wiki/faq/passwords). Be aware that RES offers very little protection for stored passwords, so be careful when sharing your computer or settings!\n\nLeave a password box blank to be prompted for a password every time you switch to that account."
 	},
 	"accountSwitcherAddAccount": {
 		"message": "+add account"
@@ -433,7 +433,13 @@
 		"message": "Link Toggle Expando"
 	},
 	"keyboardNavLinkToggleExpandoDesc": {
-		"message": "When a link has an expando, toggle it instead of opening the link. Holding alt inverts this action."
+		"message": "When a link has an expando, toggle it instead of opening the link. Alt mode inverts this action."
+	},
+	"keyboardNavLinkNumberAltModeModifierTitle": {
+		"message": "Alt mode modifier"
+	},
+	"keyboardNavLinkNumberAltModeModifierDesc": {
+		"message": "Modifier used to invert toggling expando / opening link action."
 	},
 	"keyboardNavLinkNewTabTitle": {
 		"message": "Comments Link New Tab"
@@ -765,6 +771,12 @@
 	"keyboardNavShowChildCommentsDesc": {
 		"message": "Show/hide the child comments tree (comment pages only)."
 	},
+	"keyboardNavShowAllChildCommentsTitle": {
+		"message": "Show all child comments"
+	},
+	"keyboardNavShowAllChildCommentsDesc": {
+		"message": "Show/hide all child comments on the page (comment pages only)."
+	},
 	"keyboardNavFollowPermalinkTitle": {
 		"message": "Follow Permalink"
 	},
@@ -944,6 +956,9 @@
 	},
 	"logoLinkAll": {
 		"message": "/r/all"
+	},
+	"logoLinkHot": {
+		"message": "/hot"
 	},
 	"logoLinkDashboard": {
 		"message": "Dashboard"
@@ -1742,6 +1757,9 @@
 	},
 	"accountSwitcherOptPrompt": {
 		"message": "Enter the 6 digit code from your authenticator app for $1"
+	},
+	"accountSwitcherPasswordPrompt": {
+		"message": "Enter the password for $1"
 	},
 	"backupAndRestoreProvidersFile": {
 		"message": "File"
@@ -2929,6 +2947,9 @@
 	"userTaggerTruncateTagDesc": {
 		"message": "Truncates long tags to 30 characters. Hovering over them reveals the full content."
 	},
+	"userTaggerPresetTagsDesc": {
+		"message": "Preset tags to be shown when tagging a user."
+	},
 	"scrollOnCollapseDesc": {
 		"message": "Scrolls to next comment when a comment is collapsed."
 	},
@@ -3199,6 +3220,9 @@
 	},
 	"userTaggerTruncateTagTitle": {
 		"message": "Truncate Tags"
+	},
+	"userTaggerPresetTagsTitle": {
+		"message": "Preset Tags"
 	},
 	"singleClickOpenOrderTitle": {
 		"message": "Open Order"
@@ -4259,6 +4283,12 @@
 	"showImagesAutoplayVideoDesc": {
 		"message": "Autoplay inline videos."
 	},
+	"showImagesHidePinnedRedditVideosTitle": {
+		"message": "Hide pinned reddit videos"
+	},
+	"showImagesHidePinnedRedditVideosDesc": {
+		"message": "Hide pinned Reddit-hosted videos when scrolling on comments page."
+	},
 	"showImagesHostToggleDesc": {
 		"message": "Display expandos for this host."
 	},
@@ -4345,5 +4375,11 @@
 	"submittedToSubreddit": {
 		"message": "to",
 		"description": "[post/comment submitted...] to $subreddit"
+	},
+	"faviconUseLegacyTitle": {
+		"message": "Use Legacy Favicon"
+	},
+	"faviconUseLegacyDesc": {
+		"message": "If you don't like the new orange Reddit tab icon, revert to using the old Reddit icon instead."
 	}
 }

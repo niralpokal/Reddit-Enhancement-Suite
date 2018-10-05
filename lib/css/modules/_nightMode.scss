@@ -706,7 +706,6 @@ $title-link-visited-color: hsl(0, 0%, 65%);
 	.usertext-edit textarea,
 	.RESDialogSmall,
 	.c-close,
-	#REScommentNavBox,
 	#BigEditor #BigText,
 	#liveupdate-statusbar,
 	#liveupdate-statusbar.complete,
@@ -1399,6 +1398,21 @@ $title-link-visited-color: hsl(0, 0%, 65%);
 		}
 	}
 
+	#REScommentNavBox {
+		#commentNavBy {
+			background-color: #707070;
+		}
+
+		#commentNavUp,
+		#commentNavDown {
+			color: #434343;
+		}
+
+		#commentNavPostCount {
+			color: #9f9f9f;
+		}
+	}
+
 	.res-commentNavToggle {
 		&-choices {
 			background-color: rgba(0, 0, 0, .9);
@@ -1597,7 +1611,7 @@ $title-link-visited-color: hsl(0, 0%, 65%);
 	}
 }
 
-.res-d2x-nightmode {
+.res-d2x-nightmode #container > .App {
 	.ProfileTemplate.m-updated,
 	.ProfileBarDropdown__list,
 	.ProfileSidebar__counterInfo,

@@ -10,7 +10,7 @@ body.hideOver18 {
 	// For some reason does the scss linter complain on body:not()
 	body.res:not(.res-filters-disabled):not(.res-show-filter-reason) &:not(.res-filterline-highlight-match) {
 		&:not(.res-thing-has-visible-child),
-		&.res-thing-has-visible-child.collapsed { // seperate line since :not() didn't work with multiple classes
+		&.res-thing-filter-propagate {
 			// !important since many custom stylesheets overrides it otherwise
 			display: none !important;
 		}
@@ -67,7 +67,7 @@ body.hideOver18 {
 
 .res-filteReddit-filterline-pad-until-ready {
 	.listing-page .content[role=main] > .spacer:nth-of-type(2)::before {
-		@include filterline-basic-layout
+		@include filterline-basic-layout;
 		content: ' ';
 	}
 }
@@ -84,7 +84,7 @@ body.hideOver18 {
 }
 
 .res-filterline {
-	@include filterline-basic-layout
+	@include filterline-basic-layout;
 
 	$c: &;
 
@@ -148,6 +148,14 @@ body.hideOver18 {
 					& #{$v}-button {
 						width: max-content;
 					}
+				}
+			}
+
+			&-options {
+				float: right;
+
+				input {
+					vertical-align: text-bottom;
 				}
 			}
 
@@ -235,7 +243,7 @@ body.hideOver18 {
 
 		&-action {
 			cursor: pointer;
-			margin: 1 3px;
+			margin: 1px 3px;
 			margin-left: 16px;
 			border-bottom: 1px solid #fafafa;
 			padding-bottom: 1px;
@@ -270,7 +278,12 @@ body.hideOver18 {
 		line-height: 18px;
 		display: flex;
 		cursor: default;
-		align-items: center;
+
+		> div:first-child {
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
 
 		.gearIcon {
 			margin: 0 4px 0 0;
@@ -279,8 +292,8 @@ body.hideOver18 {
 
 		.toggleButton {
 			transform: scale(.8);
-			position: absolute;
-			right: 0;
+			margin-right: -4px;
+			margin-left: auto;
 		}
 	}
 

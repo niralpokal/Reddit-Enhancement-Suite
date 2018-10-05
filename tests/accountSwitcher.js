@@ -9,7 +9,7 @@ module.exports = {
 		const username = 'this_username_is_too_long';
 
 		browser
-			.url('https://www.reddit.com/wiki/pages#res:settings/accountSwitcher')
+			.url('https://en.reddit.com/wiki/pages#res:settings/accountSwitcher')
 			.refresh() // get rid of update notification
 			.waitForElementVisible('#RESConsoleContainer')
 			.click('#optionContainer-accountSwitcher-accounts .addRowButton')
@@ -19,9 +19,9 @@ module.exports = {
 			.url('https://en.reddit.com/r/RESIntegrationTests/wiki/pages')
 			.waitForElementVisible('#RESAccountSwitcherIcon')
 			.click('#RESAccountSwitcherIcon')
-			.assert.visible('#RESAccountSwitcherDropdown')
-			.assert.containsText('#RESAccountSwitcherDropdown', username)
-			.assert.containsText('#RESAccountSwitcherDropdown', 'add account')
+			.assert.visible('.RESAccountSwitcherDropdown')
+			.assert.containsText('.RESAccountSwitcherDropdown', username)
+			.assert.containsText('.RESAccountSwitcherDropdown', 'add account')
 			.end();
 	},
 	'errors on invalid username/password': browser => {
@@ -31,20 +31,22 @@ module.exports = {
 			return;
 		}
 
-		const username = 'this_username_is_too_long';
+		const password = 'this_is_the_wrong_password';
+		const username = 'this_username_is_too_long_anyway';
 
 		browser
-			.url('https://www.reddit.com/wiki/pages#res:settings/accountSwitcher')
+			.url('https://en.reddit.com/wiki/pages#res:settings/accountSwitcher')
 			.refresh() // get rid of update notification
 			.waitForElementVisible('#RESConsoleContainer')
 			.click('#optionContainer-accountSwitcher-accounts .addRowButton')
-			.setValue('#optionContainer-accountSwitcher-accounts input', [username])
+			.setValue('#optionContainer-accountSwitcher-accounts input[type=text]', [username])
+			.setValue('#optionContainer-accountSwitcher-accounts input[type=password]', [password])
 			.click('#moduleOptionsSave')
 
 			.url('https://en.reddit.com/r/RESIntegrationTests/wiki/pages')
 			.waitForElementVisible('#RESAccountSwitcherIcon')
 			.click('#RESAccountSwitcherIcon')
-			.click('#RESAccountSwitcherDropdown .accountName')
+			.click('.RESAccountSwitcherDropdown .accountName')
 			.waitForElementVisible('#alert_message')
 			.assert.containsText('#alert_message', `Could not log in as ${username}`)
 			.end();

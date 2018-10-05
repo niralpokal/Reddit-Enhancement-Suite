@@ -4,11 +4,10 @@
 
 import path from 'path';
 
-import webpack from 'webpack';
 import InertEntryPlugin from 'inert-entry-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
-import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import ZipPlugin from 'zip-webpack-plugin';
+import sass from 'sass';
 
 const browserConfig = {
 	chrome: {
@@ -40,14 +39,13 @@ const browserConfig = {
 	},
 };
 
-export default (env = {}) => {
+export default (env = {}, argv = {}) => {
+	const isProduction = argv.mode === 'production';
 	const browsers = (
 		typeof env.browsers !== 'string' ? ['chrome'] :
 		env.browsers === 'all' ? Object.keys(browserConfig) :
 		env.browsers.split(',')
 	);
-
-	const isProduction = process.env.NODE_ENV !== 'development';
 
 	const configs = browsers.map(b => browserConfig[b]).map(conf => ({
 		entry: `extricate-loader!interpolate-loader!./${conf.entry}`,
@@ -60,7 +58,6 @@ export default (env = {}) => {
 			if (!conf.noSourcemap) return 'source-map';
 			return false;
 		})(),
-		bail: isProduction,
 		node: false,
 		performance: false,
 		module: {
@@ -77,14 +74,14 @@ export default (env = {}) => {
 						loader: 'babel-loader',
 						options: {
 							plugins: [
-								'transform-export-extensions',
-								'transform-class-properties',
-								['transform-object-rest-spread', { useBuiltIns: true }],
-								'transform-flow-strip-types',
-								'transform-dead-code-elimination',
+								'@babel/plugin-proposal-export-namespace-from',
+								['@babel/plugin-proposal-class-properties', { loose: true }],
+								['@babel/plugin-proposal-object-rest-spread', { loose: true, useBuiltIns: true }],
+								'@babel/plugin-transform-flow-strip-types',
+								'minify-dead-code-elimination',
 								['transform-define', {
 									'process.env.BUILD_TARGET': conf.target,
-									'process.env.NODE_ENV': isProduction ? 'production' : 'development',
+									'process.env.NODE_ENV': argv.mode,
 								}],
 								'lodash',
 							],
@@ -101,9 +98,9 @@ export default (env = {}) => {
 						loader: 'babel-loader',
 						options: {
 							plugins: [
-								'transform-dead-code-elimination',
+								'minify-dead-code-elimination',
 								['transform-define', {
-									'process.env.NODE_ENV': isProduction ? 'production' : 'development',
+									'process.env.NODE_ENV': argv.mode,
 								}],
 							],
 							compact: true,
@@ -119,7 +116,7 @@ export default (env = {}) => {
 					{ loader: 'extricate-loader', options: { resolve: '\\.js$' } },
 					{ loader: 'css-loader' },
 					{ loader: 'postcss-loader' },
-					{ loader: 'sass-loader' },
+					{ loader: 'sass-loader', options: { implementation: sass } },
 				],
 			}, {
 				test: /\.html$/,
@@ -140,13 +137,22 @@ export default (env = {}) => {
 				use: [
 					{ loader: 'url-loader' },
 				],
+			}, {
+				test: /\.woff$/,
+				use: [
+					conf.target === 'edge' ?
+						{ loader: 'url-loader' } :
+						{ loader: 'file-loader', options: { name: '[name].[ext]' } },
+				],
 			}],
 		},
+		optimization: {
+			minimize: false,
+			concatenateModules: true,
+		},
 		plugins: [
-			new ProgressBarPlugin(),
 			new InertEntryPlugin(),
 			new LodashModuleReplacementPlugin(),
-			new webpack.optimize.ModuleConcatenationPlugin(),
 			(env.zip && !conf.noZip && new ZipPlugin({
 				path: path.join('..', 'zip'),
 				filename: conf.output,
